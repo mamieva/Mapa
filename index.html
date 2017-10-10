@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+	<title>Visor IDE SL</title>
+
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="shortcut icon" type="image/x-icon" href="./Visor IDE SL_files/img/idesl.png" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="./Visor IDE SL_files/leaflet/leaflet.css" />
+	<link rel="stylesheet" href="./Visor IDE SL_files/leaflet/leaflet-layer-tree-control.css" />
+	<link rel="stylesheet" href="./Visor IDE SL_files/bstrap/bootstrap.min.css">
+	<link rel="stylesheet" href="./Visor IDE SL_files/css/estilos.css">
+	<link rel="stylesheet" href="./Visor IDE SL_files/bstrap-table/bootstrap-table.min.css">
+	<!--<link rel="stylesheet" href="./Visor IDE SL_files/leaflet-draw/dist/leaflet.draw.css">-->
+	<link rel="stylesheet" href="./Visor IDE SL_files/leaflet/leaflet.measurecontrol.css">
+	<link rel="stylesheet" href="./Visor IDE SL_files/leaflet-gsearch/css/l.geosearch.css">
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA58S4bHiWRCvi5tNB78zVvGCkoTvQdj9I" type="text/javascript"></script>
+	<!--<script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>-->
+	<script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
+	<!--<script type="text/javascript" src="./Visor IDE SL_files/js/jquery.js"></script>-->
+	<script src="./Visor IDE SL_files/leaflet/leaflet.js"></script>
+	<link rel="stylesheet" href="./Visor IDE SL_files/leaflet/Control.Opacity.css" />
+	<link rel="stylesheet" href="./Visor IDE SL_files/jquery/jquery-ui-1.10.3.custom.min.css" />
+	<link rel="stylesheet" href="./Visor IDE SL_files/leaflet-navbar/Leaflet.NavBar.css" />
+	<link rel="stylesheet" href="./Visor IDE SL_files/leaflet-zoombox/L.Control.ZoomBox.css" />
+	<link rel="stylesheet" href="./Visor IDE SL_files/leaflet-coordinates/Control.Coordinates.css" />
+	<link rel="stylesheet" href="./Visor IDE SL_files/leaflet-search/leaflet-search.min.css" />
+	<link rel="stylesheet" href="./Visor IDE SL_files/leaflet/leaflet-control-credits.css" />
+
+</head>
+
+<body>
+	<!--<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<div class="navbar-icon-container">
+					<a href="#" class="navbar-icon pull-right visible-xs" id="nav-btn"><i
+						class="fa fa-bars fa-lg white"></i></a>
+
+				</div>
+
+			</div>-->
+	<!--<div class="navbar-collapse collapse">-->
+
+	<!--<ul class="nav navbar-nav">
+					<li><a href="#">&nbsp;Visualizador IDE San Luis </a></li>
+					<!--<li><a href="#" role="button">&nbsp;&nbsp;|</a></li>-->
+	<!-- <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="info-btn"><i	class="fa fa-info-circle fa-lg" aria-hidden="true"></i></a></li> -->
+	<!--<li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="full-extent-btn"><i class="fa fa-arrows fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Extensión del Mapa"></i></a></li>-->
+	<!--<li><a href="#" role="button">&nbsp;&nbsp;|</a></li>-->
+	<!-- <li class="dropdown">
+    <a id="datos" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"><i
+            class="fa fa-database"></i>&nbsp;&nbsp;Capas con Datos<b class="caret"></b></a>
+    <ul class="dropdown-menu">
+        <li><a href="#" id="wfs-btn">&nbsp;&nbsp;Parcelas Rurales</a></li>
+    </ul>
+</li> -->
+	<!--<li class="dropdown">
+						<a id="datos" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">&nbsp;&nbsp;Favoritos<b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="#" id="createF-btn">&nbsp;&nbsp;Crear</a></li>
+							<li><a href="#" id="uploadF-btn">&nbsp;&nbsp;Cargar</a></li>
+							<li><a href="#" id="deleteF-btn">&nbsp;&nbsp;Borrar</a></li>
+						</ul>
+					</li>
+					<li><a href="#" role="button">&nbsp;&nbsp;|&nbsp;&nbsp;</a></li>
+				</ul>
+				<div class="nav navbar-nav col-md-2">
+					<div class="input-group" style="margin-top: 7px">
+						<input id="findbox" type="text" class="form-control" placeholder="Buscar Ciudad ...">
+						<span class="input-group-btn">
+        <button class="btn btn-default" type="button"><i class="fa fa-search" aria-hidden="true"></i>
+		</button>
+      </span>
+					</div>
+					<!-- /input-group -->
+	<!--</div>-->
+	<!-- navbar rigth  -->
+	<!--<ul class="nav navbar-nav navbar-right">
+					<li><a href="#" id="ayuda-btn">Ayuda</a></li>
+					<li><a href="#" id="acerca-btn">Acerca de ...</a></li>
+				</ul>
+
+			</div>-->
+
+	<!--/.navbar-collapse -->
+	<!--</div>-->
+	<!--</div>-->
+
+
+
+	<div class="modal fade" id="wfs-modal" tabindex="-1" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Datos de la Capa</h4>
+				</div>
+				<div class="modal-body">
+					<!-- Contenido del Modal -->
+
+					<table id="tablewfs" data-toggle="table" data-show-columns="true" data-show-toggle="true" data-show-pagination-switch="true"
+					    data-show-refresh="true" data-search="true" data-pagination="true" data-key-events="true">
+						<thead>
+							<tr id="headwfs">
+								<th data-field="ETIQUETA">ETIQUETA</th>
+								<th data-field="NOMBRE">NOMBRE</th>
+								<th data-field="LINK">LINK</th>
+								<th data-field="CATNMC_TRI">CATNMC_TRI</th>
+								<th data-field="CATNMC_CAT">CATNMC_CAT</th>
+								<th data-field="CATMEN_CODIGO">CATMEN_CODIGO</th>
+							</tr>
+						</thead>
+					</table>
+
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+
+	<!-- Ayuda del Sistema  -->
+	<div class="modal fade" id="ayuda-modal" tabindex="-1" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Ayuda del Sistema</h4>
+				</div>
+				<div class="modal-body">
+					<!-- Contenido del Modal -->
+
+
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+
+	<!-- Acerca que  del Sistema  -->
+	<div class="modal fade" id="acerca-modal" tabindex="-1" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Acerca de ... </h4>
+				</div>
+				<div class="modal-body">
+					<!-- Contenido del Modal -->
+
+
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+
+
+
+
+	<!-- Metadatos de la Capa  -->
+	<div class="modal fade" id="metadata-modal" tabindex="-1" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Metadatos de la Capa</h4>
+				</div>
+				<div class="modal-body">
+					<!-- Contenido del Modal -->
+					<div class="row" id="result-metadata">
+						<div class="embed-responsive embed-responsive-16by9">
+							<iframe class="embed-responsive-item" id="metadataIframe" src=""></iframe>
+						</div>
+
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+
+	<!-- Modal de Favoritos -->
+
+	<!-- Crear Favorito  -->
+	<div class="modal fade" id="createF-modal" tabindex="-1" role="dialog">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Nuevo Favorito</h4>
+				</div>
+				<div class="modal-body">
+					<!-- Contenido del Modal -->
+					<div class="row">
+						<div class="input-group col-md-9 col-md-offset-1">
+							<span class="input-group-addon" id="sizing-addon2">Nombre</span>
+							<input type="text" class="form-control" id="nombreF" placeholder="" aria-describedby="sizing-addon2">
+						</div>
+					</div>
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+					<button type="button" class="btn btn-primary" ip="createFS-btn">Crear</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+
+
+	<!-- Cargar Favorito  -->
+	<div class="modal fade" id="uploadF-modal" tabindex="-1" role="dialog">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Cargar Favorito</h4>
+				</div>
+				<div class="modal-body">
+					<!-- Contenido del Modal -->
+					<div class="row">
+						<div class="input-group col-md-9 col-md-offset-1">
+							<span class="input-group-addon" id="sizing-addon2">Nombre</span>
+							<select class="form-control" id="favoritoC-list" aria-describedby="sizing-addon2">
+										<option value="0">Test1</option>
+										<option value="1">Test2</option>
+										<option value="2">Test3</option>
+									</select>
+						</div>
+					</div>
+
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+					<button type="button" class="btn btn-primary" ip="uploadFS-btn">Cargar</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+
+
+	<!-- Borrrar  Favorito  -->
+	<div class="modal fade" id="deleteF-modal" tabindex="-1" role="dialog">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Borrar Favorito</h4>
+				</div>
+				<div class="modal-body">
+					<!-- Contenido del Modal -->
+					<div class="row">
+						<div class="input-group col-md-9 col-md-offset-1">
+							<span class="input-group-addon" id="sizing-addon2">Nombre</span>
+							<select class="form-control" id="favoritoB-list" aria-describedby="sizing-addon2">
+											<option value="0">Test1</option>
+											<option value="1">Test2</option>
+											<option value="2">Test3</option>
+										</select>
+						</div>
+					</div>
+
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+					<button type="button" class="btn btn-danger" ip="deleteFS-btn">Borrar</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+
+
+	<!-- Busqueda de Filtro  -->
+	<div class="modal fade" id="filter-modal" tabindex="-1" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="filter-title"></h4>
+				</div>
+
+				<div class="modal-body">
+					<div id="filter-mensaje">
+						<!-- Mensajes del Modal -->
+					</div>
+					<div id="filter-content">
+						<!-- Contenido del Modal -->
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+					<button type="button" class="btn btn-primary" id="search-btn">Buscar</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+
+
+
+	<div id="container">
+
+		<div id='map'>
+			<div id="cabecera">
+			</div>
+				<div id="logoDPEC" class="leaflet-control"></div>
+				<div id="logoGobierno" class="leaflet-control"></div>
+		</div>
+		<!--Inicio del Menu de Busqueda-->
+		<!--<div id="sidebar">
+		<div class="sidebar-wrapper">
+			<div class="panel panel-default" id="features">
+				<div class="panel-heading">
+
+					<h3 class="panel-title">Resultados&nbsp;&nbsp;
+						<button type="button" class="btn btn-xs btn-default pull-right" id="sidebar-hide-btn">
+							<i class="fa fa-chevron-down"></i></button>
+					</h3>
+				</div>
+				<div class="sidebar-table" id="result-list">
+				</div>
+			</div>
+		</div>
+	</div>-->
+		<!--Fin del menu de busqueda -->
+
+		<!--Menu desplegable inferior-->
+
+
+		<div id='toppanel'>
+
+			<div class="navbar navbar-default" id="navbar-flex">
+				<ul class="nav navbar-nav">
+					<li><a href="#">&nbsp;Resultados: &nbsp;</a></li>
+					<!--<li><a href="#" role="button">&nbsp;|</a></li>-->
+					<li id="result-layer"></li>
+					<li><a href="#" role="button">&nbsp;|</a></li>
+					<li id="result-filter"></li>
+					<li><a href="#" role="button">|</a></li>
+					<!--<li><a href="#" id="zoom-element-btn"><i class="fa fa-search" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Zoom al elemento seleccionado"></i>&nbsp;&nbsp;Zoom a la Selección</a></li>-->
+					<li><a href="#" id="close-btn"><i class="fa fa-close" aria-hidden="true"></i>&nbsp;Cerrar&nbsp;&nbsp;</a></li>
+				</ul>
+				<!--
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#" id="close-btn"><i class="fa fa-close" aria-hidden="true"></i>&nbsp;&nbsp;Cerrar&nbsp;&nbsp;</a></li>
+				</ul>-->
+
+			</div>
+
+
+			<!--
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+
+                        <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="zoom-element-btn"><i class="fa fa-search" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Zoom al elemento seleccionado"></i>Zoom a la Selección</a></li>
+
+                    </ul>
+                    &lt;!&ndash; navbar rigth  &ndash;&gt;
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#" id="close-btn"><i class="fa fa-close" aria-hidden="true"></i>&nbsp;&nbsp;Cerrar</a></li>
+                    </ul>
+
+                </div>
+
+                &lt;!&ndash;/.navbar-collapse &ndash;&gt;
+            </div>
+        </div>
+        -->
+
+
+
+
+
+
+			<div id='panel'>
+
+
+				<div class='content clearfix' id="result-content">
+
+				</div>
+			</div>
+
+		</div>
+
+		<!--FIN Menu desplegable inferior-->
+
+
+	</div>
+
+
+
+	<script type="application/javascript" src="./Visor IDE SL_files/bstrap/bootstrap.min.js"></script>
+	<script type="text/javascript" src="./Visor IDE SL_files/leaflet/leaflet-layer-tree-control.js"></script>
+	<script type="text/javascript" src="./Visor IDE SL_files/leaflet/leaflet-layer-tree-control-wfs-zoom.js"></script>
+
+	<script src="./Visor IDE SL_files/bstrap-table/bootstrap-table.min.js"></script>
+	<script src="./Visor IDE SL_files/bstrap-table/bootstrap-table-es-AR.min.js"></script>
+
+	<!--<script src="./Visor IDE SL_files/leaflet-draw/Leaflet.draw.js"></script>
+	<script src="./Visor IDE SL_files/leaflet-draw/edit/handler/Edit.Poly.js"></script>
+	<script src="./Visor IDE SL_files/leaflet-draw/edit/handler/Edit.SimpleShape.js"></script>
+	<script src="./Visor IDE SL_files/leaflet-draw/edit/handler/Edit.Circle.js"></script>
+	<script src="./Visor IDE SL_files/leaflet-draw/edit/handler/Edit.Rectangle.js"></script>
+	<!--<script src="./Visor IDE SL_files/leaflet-draw/draw/handler/Draw.Feature.js"></script>
+	<script src="./Visor IDE SL_files/leaflet-draw/draw/handler/Draw.Polyline.js"></script>
+	<script src="./Visor IDE SL_files/leaflet-draw/draw/handler/Draw.Polygon.js"></script>
+	<script src="./Visor IDE SL_files/leaflet-draw/draw/handler/Draw.SimpleShape.js"></script>
+	<script src="./Visor IDE SL_files/leaflet-draw/draw/handler/Draw.Rectangle.js"></script>
+	<script src="./Visor IDE SL_files/leaflet-draw/draw/handler/Draw.Circle.js"></script>
+	<script src="./Visor IDE SL_files/leaflet-draw/draw/handler/Draw.Marker.js"></script>-->
+	<script src="./Visor IDE SL_files/leaflet-draw/ext/TouchEvents.js"></script>
+	<script src="./Visor IDE SL_files/leaflet-draw/ext/LatLngUtil.js"></script>
+	<script src="./Visor IDE SL_files/leaflet-draw/ext/GeometryUtil.js"></script>
+	<script src="./Visor IDE SL_files/leaflet-draw/ext/LineUtil.Intersect.js"></script>
+	<script src="./Visor IDE SL_files/leaflet-draw/ext/Polyline.Intersect.js"></script>
+	<script src="./Visor IDE SL_files/leaflet-draw/ext/Polygon.Intersect.js"></script>
+	<script src="./Visor IDE SL_files/leaflet-draw/Control.Draw.js"></script>
+	<script src="./Visor IDE SL_files/leaflet-draw/Tooltip.js"></script>
+	<script src="./Visor IDE SL_files/leaflet-draw/Toolbar.js"></script>
+	<script src="./Visor IDE SL_files/leaflet-draw/draw/DrawToolbar.js"></script>
+	<script src="./Visor IDE SL_files/leaflet-draw/edit/EditToolbar.js"></script>
+	<script src="./Visor IDE SL_files/leaflet-draw/edit/handler/EditToolbar.Edit.js"></script>
+	<script src="./Visor IDE SL_files/leaflet-draw/edit/handler/EditToolbar.Delete.js"></script>-->
+
+
+
+	<script src="./Visor IDE SL_files/leaflet/leaflet.measurecontrol.min.js"></script>
+
+	<script src="./Visor IDE SL_files/leaflet-gsearch/js/l.control.geosearch.js"></script>
+	<script src="./Visor IDE SL_files/leaflet-gsearch/js/l.geosearch.provider.google.js"></script>
+	<script src="./Visor IDE SL_files/leaflet/Leaflet.GoogleMutant.js"></script>
+	<script src="./Visor IDE SL_files/leaflet/leaflet.wms.js"></script>
+
+	<script src="./Visor IDE SL_files/leaflet-navbar/Leaflet.NavBar.js"></script>
+	<script src="./Visor IDE SL_files/leaflet-zoombox/L.Control.ZoomBox.min.js"></script>
+
+	<script src="./Visor IDE SL_files/leaflet-search/leaflet-search.min.js"></script>
+
+	<script src="./Visor IDE SL_files/leaflet/Control.Opacity.js"></script>
+	<script src="./Visor IDE SL_files/jquery/jquery-ui-1.10.3.custom.min.js"></script>
+
+	<script src="./Visor IDE SL_files/leaflet-coordinates/Control.Coordinates.js"></script>
+
+	<script type="text/javascript" src="./Visor IDE SL_files/leaflet/leaflet-control-credits.js"></script>
+
+
+	<script type="text/javascript" src="./Visor IDE SL_files/js/sources/tree_groups.js"></script>
+	<script type="text/javascript" src="./Visor IDE SL_files/js/app.js"></script>
+
+</body>
+
+</html>
